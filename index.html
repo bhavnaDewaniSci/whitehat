@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS=false; L_NO_TOUCH=false; L_DISABLE_3D=false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.4.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>#map_36e3b03bf42741fd97bdbbcc7e08cb04 {
+        position: relative;
+        width: 1200.0px;
+        height: 500.0px;
+        left: 8.0%;
+        top: 2.0%;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    
+                <style>
+                    #scroll_zoom_toggler_c76cf986d375443c81a9bd2770082142 {
+                        position:absolute;
+                        width:35px;
+                        bottom:10px;
+                        height:35px;
+                        left:10px;
+                        background-color:#fff;
+                        text-align:center;
+                        line-height:35px;
+                        vertical-align: middle;
+                        }
+                </style>
+            
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.css"/>
+</head>
+<body>   
+	<h2 style="text-align:center;">COVID-19 Total Confirmed Cases in India</h2>
+	<h4 style="text-align:center;"><i>Created by</i> Bhavna </h4>
+	<h4 style="text-align:center;">
+  		<i>Powered by</i>
+  		<a href="https://www.whitehatjr.com/"><b>WhiteHat Jr</b></a>
+	</h4> 
+    
+    <div class="folium-map" id="map_36e3b03bf42741fd97bdbbcc7e08cb04" ></div>
+    
+            <img id="scroll_zoom_toggler_c76cf986d375443c81a9bd2770082142" alt="scroll"
+                 src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/png/512/arrow-move.png"
+                 style="z-index: 999999"
+                 onclick="map_36e3b03bf42741fd97bdbbcc7e08cb04.toggleScroll()">
+            </img>
+    <br>        
+</body>
+<script>    
+    
+    
+        var bounds = null;
+    
+
+    var map_36e3b03bf42741fd97bdbbcc7e08cb04 = L.map(
+        'map_36e3b03bf42741fd97bdbbcc7e08cb04', {
+        center: [22.3511148, 78.6677428],
+        zoom: 4,
+        maxBounds: bounds,
+        layers: [],
+        worldCopyJump: false,
+        crs: L.CRS.EPSG3857,
+        zoomControl: true,
+        });
+
+
+    
+    var tile_layer_5516836e1c604816af2140c6f41c65ec = L.tileLayer(
+        'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png',
+        {
+        "attribution": null,
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+}).addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+    
+
+        var tile_layer_5eb739fcff714e4da7ff1c75c684e602 = L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+        "attribution": null,
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+} );
+
+        var mini_map_7cf9c2f89f9e4f259c37c6532fad56f5 = new L.Control.MiniMap( tile_layer_5eb739fcff714e4da7ff1c75c684e602,
+         {
+  "autoToggleDisplay": false,
+  "centerFixed": false,
+  "collapsedHeight": 25,
+  "collapsedWidth": 25,
+  "height": 150,
+  "minimized": false,
+  "position": "bottomright",
+  "toggleDisplay": true,
+  "width": 150,
+  "zoomAnimation": false,
+  "zoomLevelFixed": null,
+  "zoomLevelOffset": -5
+});
+        map_36e3b03bf42741fd97bdbbcc7e08cb04.addControl(mini_map_7cf9c2f89f9e4f259c37c6532fad56f5);
+
+        
+    
+                    map_36e3b03bf42741fd97bdbbcc7e08cb04.scrollEnabled = true;
+
+                    map_36e3b03bf42741fd97bdbbcc7e08cb04.toggleScroll = function() {
+                        if (this.scrollEnabled) {
+                            this.scrollEnabled = false;
+                            this.scrollWheelZoom.disable();
+                            }
+                        else {
+                            this.scrollEnabled = true;
+                            this.scrollWheelZoom.enable();
+                            }
+                        };
+
+                    map_36e3b03bf42741fd97bdbbcc7e08cb04.toggleScroll();
+            
+    
+            L.control.fullscreen({
+                position: 'topright',
+                title: 'Full Screen',
+                titleCancel: 'Exit Full Screen',
+                forceSeparateButton: false,
+                }).addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            map_36e3b03bf42741fd97bdbbcc7e08cb04.on('enterFullscreen', function(){
+                console.log('entered fullscreen');
+            });
+
+        
+    
+
+            var circle_17915848c6ff45afab5ca6f46071f620 = L.circle(
+                [19.531932, 76.0554568],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 214132.0,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_925ce52837a04aa0871fd16eddb1eb0b = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_18323013159a4234b8ce752e6b5099d6 = $(`<div id="html_18323013159a4234b8ce752e6b5099d6" style="width: 100.0%; height: 100.0%;">Maharashtra  267665  on 14/07/2020 20:09:00</div>`)[0];
+                popup_925ce52837a04aa0871fd16eddb1eb0b.setContent(html_18323013159a4234b8ce752e6b5099d6);
+            
+
+            circle_17915848c6ff45afab5ca6f46071f620.bindPopup(popup_925ce52837a04aa0871fd16eddb1eb0b)
+            ;
+
+            
+        
+    
+
+            var circle_d0784da707fe47c3970aed40c2394d83 = L.circle(
+                [10.9094334, 78.3665347],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 117859.2,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_5e14bb471b664bbb8a03616d94e20b3c = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_948c629a5cf24b269e49ef6737f4f213 = $(`<div id="html_948c629a5cf24b269e49ef6737f4f213" style="width: 100.0%; height: 100.0%;">Tamil Nadu  147324  on 14/07/2020 20:09:01</div>`)[0];
+                popup_5e14bb471b664bbb8a03616d94e20b3c.setContent(html_948c629a5cf24b269e49ef6737f4f213);
+            
+
+            circle_d0784da707fe47c3970aed40c2394d83.bindPopup(popup_5e14bb471b664bbb8a03616d94e20b3c)
+            ;
+
+            
+        
+    
+
+            var circle_77b61e43367546879e93fe86e748676b = L.circle(
+                [28.6517178, 77.2219388],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 92276.8,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_78587206823148278789d467637d8451 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_a9086b85cc044129a236c15421935c27 = $(`<div id="html_a9086b85cc044129a236c15421935c27" style="width: 100.0%; height: 100.0%;">Delhi  115346  on 14/07/2020 20:09:03</div>`)[0];
+                popup_78587206823148278789d467637d8451.setContent(html_a9086b85cc044129a236c15421935c27);
+            
+
+            circle_77b61e43367546879e93fe86e748676b.bindPopup(popup_78587206823148278789d467637d8451)
+            ;
+
+            
+        
+    
+
+            var circle_dd30d65fe253412caa7afc7cd7c4eacb = L.circle(
+                [22.3850008, 71.7452633],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 34246.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_e57561b615b1448dad5469dc07f15e14 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_7cdeb3338c8e4adf974bf69abfc04529 = $(`<div id="html_7cdeb3338c8e4adf974bf69abfc04529" style="width: 100.0%; height: 100.0%;">Gujarat  42808  on 13/07/2020 19:54:11</div>`)[0];
+                popup_e57561b615b1448dad5469dc07f15e14.setContent(html_7cdeb3338c8e4adf974bf69abfc04529);
+            
+
+            circle_dd30d65fe253412caa7afc7cd7c4eacb.bindPopup(popup_e57561b615b1448dad5469dc07f15e14)
+            ;
+
+            
+        
+    
+
+            var circle_62798f498b5e498ea2563deb33ae5339 = L.circle(
+                [14.5203896, 75.7223521],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 35261.6,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_ffc1a831866446a1a1a95a7441ade55a = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_28b28abfe77646c4bdba757ffa867e93 = $(`<div id="html_28b28abfe77646c4bdba757ffa867e93" style="width: 100.0%; height: 100.0%;">Karnataka  44077  on 14/07/2020 20:09:04</div>`)[0];
+                popup_ffc1a831866446a1a1a95a7441ade55a.setContent(html_28b28abfe77646c4bdba757ffa867e93);
+            
+
+            circle_62798f498b5e498ea2563deb33ae5339.bindPopup(popup_ffc1a831866446a1a1a95a7441ade55a)
+            ;
+
+            
+        
+    
+
+            var circle_9f778075eb9b49d98d1ce6ad675ded3f = L.circle(
+                [27.1303344, 80.859666],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 31779.2,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_7a9ffda210654dc884943efa2085cde1 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_08caab324dff4fcda61e57c9737f813b = $(`<div id="html_08caab324dff4fcda61e57c9737f813b" style="width: 100.0%; height: 100.0%;">Uttar Pradesh  39724  on 13/07/2020 18:40:09</div>`)[0];
+                popup_7a9ffda210654dc884943efa2085cde1.setContent(html_08caab324dff4fcda61e57c9737f813b);
+            
+
+            circle_9f778075eb9b49d98d1ce6ad675ded3f.bindPopup(popup_7a9ffda210654dc884943efa2085cde1)
+            ;
+
+            
+        
+    
+
+            var circle_db6a2cb6690c4e429f9d5e690fc56b52 = L.circle(
+                [17.8495919, 79.1151663],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 28976.8,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_f928726ef8064117a4e2da8d12a1de54 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_6b77f875251446b98ca2d90d1ee3ad48 = $(`<div id="html_6b77f875251446b98ca2d90d1ee3ad48" style="width: 100.0%; height: 100.0%;">Telangana  36221  on 13/07/2020 22:07:10</div>`)[0];
+                popup_f928726ef8064117a4e2da8d12a1de54.setContent(html_6b77f875251446b98ca2d90d1ee3ad48);
+            
+
+            circle_db6a2cb6690c4e429f9d5e690fc56b52.bindPopup(popup_f928726ef8064117a4e2da8d12a1de54)
+            ;
+
+            
+        
+    
+
+            var circle_66eca0d20e9e4adaa9dfc621ae391bd2 = L.circle(
+                [15.9240905, 80.1863809],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 26415.2,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_3de72965754b43119af2784d5ad211b4 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_bb9af7e3bcee4cc8a1c26509825b93e6 = $(`<div id="html_bb9af7e3bcee4cc8a1c26509825b93e6" style="width: 100.0%; height: 100.0%;">Andhra Pradesh  33019  on 14/07/2020 14:18:08</div>`)[0];
+                popup_3de72965754b43119af2784d5ad211b4.setContent(html_bb9af7e3bcee4cc8a1c26509825b93e6);
+            
+
+            circle_66eca0d20e9e4adaa9dfc621ae391bd2.bindPopup(popup_3de72965754b43119af2784d5ad211b4)
+            ;
+
+            
+        
+    
+
+            var circle_4b0c7015c81340858706854f15c3a761 = L.circle(
+                [22.9964948, 87.6855882],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 26270.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_b337b559248d483bb8b4a615780f20ac = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_cb01eb3fa41d4773b93966d89c4bd830 = $(`<div id="html_cb01eb3fa41d4773b93966d89c4bd830" style="width: 100.0%; height: 100.0%;">West Bengal  32838  on 13/07/2020 20:07:10</div>`)[0];
+                popup_b337b559248d483bb8b4a615780f20ac.setContent(html_cb01eb3fa41d4773b93966d89c4bd830);
+            
+
+            circle_4b0c7015c81340858706854f15c3a761.bindPopup(popup_b337b559248d483bb8b4a615780f20ac)
+            ;
+
+            
+        
+    
+
+            var circle_b121363073df4be495eca299224302ff = L.circle(
+                [26.8105777, 73.7684549],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 20027.2,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_6f760bcaf23b4f40983042cd6155a869 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_c79365cf9dd644dd9157be88eab7b85e = $(`<div id="html_c79365cf9dd644dd9157be88eab7b85e" style="width: 100.0%; height: 100.0%;">Rajasthan  25034  on 14/07/2020 11:17:08</div>`)[0];
+                popup_6f760bcaf23b4f40983042cd6155a869.setContent(html_c79365cf9dd644dd9157be88eab7b85e);
+            
+
+            circle_b121363073df4be495eca299224302ff.bindPopup(popup_6f760bcaf23b4f40983042cd6155a869)
+            ;
+
+            
+        
+    
+
+            var circle_982e4079cc72474991dea7b6e776fe85 = L.circle(
+                [29.0, 76.0],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 18102.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_823061a2c95e42509eaea8d7ff98cd74 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_51e7b807704c4ab09305437bac802e29 = $(`<div id="html_51e7b807704c4ab09305437bac802e29" style="width: 100.0%; height: 100.0%;">Haryana  22628  on 13/07/2020 20:43:19</div>`)[0];
+                popup_823061a2c95e42509eaea8d7ff98cd74.setContent(html_51e7b807704c4ab09305437bac802e29);
+            
+
+            circle_982e4079cc72474991dea7b6e776fe85.bindPopup(popup_823061a2c95e42509eaea8d7ff98cd74)
+            ;
+
+            
+        
+    
+
+            var circle_a86985f10a83473e95f48f7b4c1a2599 = L.circle(
+                [25.6440845, 85.906508],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 15082.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_761585af076b4c859ce99da9d9a9c365 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_4b13ae58707a4845b6de8a90383965a2 = $(`<div id="html_4b13ae58707a4845b6de8a90383965a2" style="width: 100.0%; height: 100.0%;">Bihar  18853  on 14/07/2020 16:49:10</div>`)[0];
+                popup_761585af076b4c859ce99da9d9a9c365.setContent(html_4b13ae58707a4845b6de8a90383965a2);
+            
+
+            circle_a86985f10a83473e95f48f7b4c1a2599.bindPopup(popup_761585af076b4c859ce99da9d9a9c365)
+            ;
+
+            
+        
+    
+
+            var circle_38aac740a8784676a78021e633748ac0 = L.circle(
+                [23.9699282, 79.39486954625225],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 14565.6,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_6bc5c60fead34e798483231d2cef95e7 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_c8f1eb8378ba40359ebd9e7a01c649a3 = $(`<div id="html_c8f1eb8378ba40359ebd9e7a01c649a3" style="width: 100.0%; height: 100.0%;">Madhya Pradesh  18207  on 13/07/2020 21:07:10</div>`)[0];
+                popup_6bc5c60fead34e798483231d2cef95e7.setContent(html_c8f1eb8378ba40359ebd9e7a01c649a3);
+            
+
+            circle_38aac740a8784676a78021e633748ac0.bindPopup(popup_6bc5c60fead34e798483231d2cef95e7)
+            ;
+
+            
+        
+    
+
+            var circle_d10479d27378453083280d343e497efb = L.circle(
+                [26.4073841, 93.2551303],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 14246.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_082fe03860314d678093145aa042c798 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_b50e7d961b6942cfaf1b1e01b22bfb26 = $(`<div id="html_b50e7d961b6942cfaf1b1e01b22bfb26" style="width: 100.0%; height: 100.0%;">Assam  17808  on 14/07/2020 12:00:08</div>`)[0];
+                popup_082fe03860314d678093145aa042c798.setContent(html_b50e7d961b6942cfaf1b1e01b22bfb26);
+            
+
+            circle_d10479d27378453083280d343e497efb.bindPopup(popup_082fe03860314d678093145aa042c798)
+            ;
+
+            
+        
+    
+
+            var circle_0b31e91194f04e999113b003bce0df0b = L.circle(
+                [20.5431241, 84.6897321],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 11424.0,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_3c2711400d984b69af9b7b67e189138d = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_0f1692e342f74cf18c97ed8bae155840 = $(`<div id="html_0f1692e342f74cf18c97ed8bae155840" style="width: 100.0%; height: 100.0%;">Odisha  14280  on 14/07/2020 11:27:08</div>`)[0];
+                popup_3c2711400d984b69af9b7b67e189138d.setContent(html_0f1692e342f74cf18c97ed8bae155840);
+            
+
+            circle_0b31e91194f04e999113b003bce0df0b.bindPopup(popup_3c2711400d984b69af9b7b67e189138d)
+            ;
+
+            
+        
+    
+
+            var circle_a96f39e0c0114b4ba3cb746ceccce816 = L.circle(
+                [33.5574473, 75.06152],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 8661.6,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_2509420094dd47bda4f493dc73856e1d = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_7264acd5e4ea41d9acab280aa383374d = $(`<div id="html_7264acd5e4ea41d9acab280aa383374d" style="width: 100.0%; height: 100.0%;">Jammu and Kashmir  10827  on 13/07/2020 20:43:23</div>`)[0];
+                popup_2509420094dd47bda4f493dc73856e1d.setContent(html_7264acd5e4ea41d9acab280aa383374d);
+            
+
+            circle_a96f39e0c0114b4ba3cb746ceccce816.bindPopup(popup_2509420094dd47bda4f493dc73856e1d)
+            ;
+
+            
+        
+    
+
+            var circle_f280ac50539448069424eecea8cd8cc5 = L.circle(
+                [30.9293211, 75.5004841],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 6808.8,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_2cd1ff77a9d541988e0c43a3a01f0563 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_99619b9cae4b4a938daa630a4d617be3 = $(`<div id="html_99619b9cae4b4a938daa630a4d617be3" style="width: 100.0%; height: 100.0%;">Punjab  8511  on 13/07/2020 19:54:14</div>`)[0];
+                popup_2cd1ff77a9d541988e0c43a3a01f0563.setContent(html_99619b9cae4b4a938daa630a4d617be3);
+            
+
+            circle_f280ac50539448069424eecea8cd8cc5.bindPopup(popup_2cd1ff77a9d541988e0c43a3a01f0563)
+            ;
+
+            
+        
+    
+
+            var circle_ca3efe3c883b4c608548d657487be496 = L.circle(
+                [10.3528744, 76.5120396],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 7144.8,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_302fab7978ba4cfd8df184f8f6753523 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_ebce41af08374220874d542991f0fe96 = $(`<div id="html_ebce41af08374220874d542991f0fe96" style="width: 100.0%; height: 100.0%;">Kerala  8931  on 13/07/2020 19:18:11</div>`)[0];
+                popup_302fab7978ba4cfd8df184f8f6753523.setContent(html_ebce41af08374220874d542991f0fe96);
+            
+
+            circle_ca3efe3c883b4c608548d657487be496.bindPopup(popup_302fab7978ba4cfd8df184f8f6753523)
+            ;
+
+            
+        
+    
+
+            var circle_e2abcd995b0c4c1ca9494364be3e134c = L.circle(
+                [21.6637359, 81.8406351],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 3412.0,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_ffec3b6c28e74221ab88df08526ea339 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_8cf5d856b7e1400288b6d8d7a74d2c68 = $(`<div id="html_8cf5d856b7e1400288b6d8d7a74d2c68" style="width: 100.0%; height: 100.0%;">Chhattisgarh  4265  on 13/07/2020 20:54:12</div>`)[0];
+                popup_ffec3b6c28e74221ab88df08526ea339.setContent(html_8cf5d856b7e1400288b6d8d7a74d2c68);
+            
+
+            circle_e2abcd995b0c4c1ca9494364be3e134c.bindPopup(popup_ffec3b6c28e74221ab88df08526ea339)
+            ;
+
+            
+        
+    
+
+            var circle_16a366b4f0eb41e696580b1fa9b27fa5 = L.circle(
+                [23.4559809, 85.2557301],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 3170.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_67cdc1e270a3481595bd89476ee061d9 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_fafed0375dea408d8c10a8cbf4c3375a = $(`<div id="html_fafed0375dea408d8c10a8cbf4c3375a" style="width: 100.0%; height: 100.0%;">Jharkhand  3963  on 13/07/2020 22:55:11</div>`)[0];
+                popup_67cdc1e270a3481595bd89476ee061d9.setContent(html_fafed0375dea408d8c10a8cbf4c3375a);
+            
+
+            circle_16a366b4f0eb41e696580b1fa9b27fa5.bindPopup(popup_67cdc1e270a3481595bd89476ee061d9)
+            ;
+
+            
+        
+    
+
+            var circle_c572fdc7004a41de914c9d0dff2573fa = L.circle(
+                [30.091993549999998, 79.32176659343018],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 2948.8,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_5e44381b8d674964a175e42b75410a94 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_72e27f12112d41738da0a51468b7a871 = $(`<div id="html_72e27f12112d41738da0a51468b7a871" style="width: 100.0%; height: 100.0%;">Uttarakhand  3686  on 13/07/2020 19:58:15</div>`)[0];
+                popup_5e44381b8d674964a175e42b75410a94.setContent(html_72e27f12112d41738da0a51468b7a871);
+            
+
+            circle_c572fdc7004a41de914c9d0dff2573fa.bindPopup(popup_5e44381b8d674964a175e42b75410a94)
+            ;
+
+            
+        
+    
+
+            var circle_c4cb7a1c635d4c16bc0dbcd6fcb44b13 = L.circle(
+                [15.3004543, 74.0855134],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 2066.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_ac8c3bb3f4d74d508062000643d2819b = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_099150c650724f3c8638f2931aff57b1 = $(`<div id="html_099150c650724f3c8638f2931aff57b1" style="width: 100.0%; height: 100.0%;">Goa  2583  on 13/07/2020 21:51:25</div>`)[0];
+                popup_ac8c3bb3f4d74d508062000643d2819b.setContent(html_099150c650724f3c8638f2931aff57b1);
+            
+
+            circle_c4cb7a1c635d4c16bc0dbcd6fcb44b13.bindPopup(popup_ac8c3bb3f4d74d508062000643d2819b)
+            ;
+
+            
+        
+    
+
+            var circle_bc0c965f79254d7499c34658ef99fcc5 = L.circle(
+                [48.850208300000006, -54.01432201022468],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 1743.2,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_da9bd887cd4e4f17ac62b6f891890880 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_cf3ba75f46c5435fa9dca1619cf65eb3 = $(`<div id="html_cf3ba75f46c5435fa9dca1619cf65eb3" style="width: 100.0%; height: 100.0%;">State Unassigned  2179  on 14/07/2020 09:58:09</div>`)[0];
+                popup_da9bd887cd4e4f17ac62b6f891890880.setContent(html_cf3ba75f46c5435fa9dca1619cf65eb3);
+            
+
+            circle_bc0c965f79254d7499c34658ef99fcc5.bindPopup(popup_da9bd887cd4e4f17ac62b6f891890880)
+            ;
+
+            
+        
+    
+
+            var circle_8021fdfc17a3445faaa75bf5f07812e7 = L.circle(
+                [23.7750823, 91.7025091],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 1674.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_740097a3a25f422f8ee2916ea4d38e03 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_e91ca1268b8a46b7b36bc9b8770dcc91 = $(`<div id="html_e91ca1268b8a46b7b36bc9b8770dcc91" style="width: 100.0%; height: 100.0%;">Tripura  2093  on 13/07/2020 22:28:11</div>`)[0];
+                popup_740097a3a25f422f8ee2916ea4d38e03.setContent(html_e91ca1268b8a46b7b36bc9b8770dcc91);
+            
+
+            circle_8021fdfc17a3445faaa75bf5f07812e7.bindPopup(popup_740097a3a25f422f8ee2916ea4d38e03)
+            ;
+
+            
+        
+    
+
+            var circle_42687f1f01c2490a981c3ca23a2b37c3 = L.circle(
+                [24.7208818, 93.9229386],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 1300.8,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_0e8886b01984449c983f864dc5f89ba5 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_79f1915f22bd4e788254cff4014c594e = $(`<div id="html_79f1915f22bd4e788254cff4014c594e" style="width: 100.0%; height: 100.0%;">Manipur  1626  on 13/07/2020 22:28:12</div>`)[0];
+                popup_0e8886b01984449c983f864dc5f89ba5.setContent(html_79f1915f22bd4e788254cff4014c594e);
+            
+
+            circle_42687f1f01c2490a981c3ca23a2b37c3.bindPopup(popup_0e8886b01984449c983f864dc5f89ba5)
+            ;
+
+            
+        
+    
+
+            var circle_10d2fd3647bd40d0b6d7b4c696f0e274 = L.circle(
+                [11.9340568, 79.8306447],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 1224.8,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_9b1f679635db46fa8012432832f90ad5 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_7166b990c11d4c298d85a8a4689c5a68 = $(`<div id="html_7166b990c11d4c298d85a8a4689c5a68" style="width: 100.0%; height: 100.0%;">Puducherry  1531  on 14/07/2020 11:07:13</div>`)[0];
+                popup_9b1f679635db46fa8012432832f90ad5.setContent(html_7166b990c11d4c298d85a8a4689c5a68);
+            
+
+            circle_10d2fd3647bd40d0b6d7b4c696f0e274.bindPopup(popup_9b1f679635db46fa8012432832f90ad5)
+            ;
+
+            
+        
+    
+
+            var circle_9cef9df3437c41e7bcc2c6cb8c1b661c = L.circle(
+                [31.81676015, 77.34932051968858],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 1038.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_f38ad25c557e4e7d86340e1fb74239e0 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_3bc6c29d8d544a69aca88e93d3eac74b = $(`<div id="html_3bc6c29d8d544a69aca88e93d3eac74b" style="width: 100.0%; height: 100.0%;">Himachal Pradesh  1298  on 14/07/2020 12:18:09</div>`)[0];
+                popup_f38ad25c557e4e7d86340e1fb74239e0.setContent(html_3bc6c29d8d544a69aca88e93d3eac74b);
+            
+
+            circle_9cef9df3437c41e7bcc2c6cb8c1b661c.bindPopup(popup_f38ad25c557e4e7d86340e1fb74239e0)
+            ;
+
+            
+        
+    
+
+            var circle_7a7fb9365a96467da5a86f4395978ecf = L.circle(
+                [33.9456407, 77.6568576],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 902.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_6c7e3752521040eca527a82f455c8e11 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_00a99ca14c354ff6b4647b11b231a529 = $(`<div id="html_00a99ca14c354ff6b4647b11b231a529" style="width: 100.0%; height: 100.0%;">Ladakh  1128  on 13/07/2020 17:41:09</div>`)[0];
+                popup_6c7e3752521040eca527a82f455c8e11.setContent(html_00a99ca14c354ff6b4647b11b231a529);
+            
+
+            circle_7a7fb9365a96467da5a86f4395978ecf.bindPopup(popup_6c7e3752521040eca527a82f455c8e11)
+            ;
+
+            
+        
+    
+
+            var circle_7011504c722c46e4ad5481443ae71c41 = L.circle(
+                [26.1630556, 94.5884911],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 716.8,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_0d10d63d912c482abe95a9da411e8443 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_11dea6734a2c4a9982a1f1b6356bd523 = $(`<div id="html_11dea6734a2c4a9982a1f1b6356bd523" style="width: 100.0%; height: 100.0%;">Nagaland  896  on 14/07/2020 18:15:10</div>`)[0];
+                popup_0d10d63d912c482abe95a9da411e8443.setContent(html_11dea6734a2c4a9982a1f1b6356bd523);
+            
+
+            circle_7011504c722c46e4ad5481443ae71c41.bindPopup(popup_0d10d63d912c482abe95a9da411e8443)
+            ;
+
+            
+        
+    
+
+            var circle_292929f926864c14abd44f32fe0cff7c = L.circle(
+                [30.7334421, 76.7797143],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 470.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_5d1ac25f2f6b4d0d86b1d7e47ae4705a = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_438ce71455dd404cb48d3f54b02b60cb = $(`<div id="html_438ce71455dd404cb48d3f54b02b60cb" style="width: 100.0%; height: 100.0%;">Chandigarh  588  on 13/07/2020 20:28:26</div>`)[0];
+                popup_5d1ac25f2f6b4d0d86b1d7e47ae4705a.setContent(html_438ce71455dd404cb48d3f54b02b60cb);
+            
+
+            circle_292929f926864c14abd44f32fe0cff7c.bindPopup(popup_5d1ac25f2f6b4d0d86b1d7e47ae4705a)
+            ;
+
+            
+        
+    
+
+            var circle_11d4944bf2964185a18c8968db4faf94 = L.circle(
+                [20.717985749999997, 70.932399240922],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 424.0,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_d53a80cff7244a569195d74e70f774c3 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_56cffd98b51b4ad1864fae3ea9321096 = $(`<div id="html_56cffd98b51b4ad1864fae3ea9321096" style="width: 100.0%; height: 100.0%;">Dadra and Nagar Haveli and Daman and Diu  530  on 14/07/2020 17:59:13</div>`)[0];
+                popup_d53a80cff7244a569195d74e70f774c3.setContent(html_56cffd98b51b4ad1864fae3ea9321096);
+            
+
+            circle_11d4944bf2964185a18c8968db4faf94.bindPopup(popup_d53a80cff7244a569195d74e70f774c3)
+            ;
+
+            
+        
+    
+
+            var circle_0e277d54eef54364914100b787720199 = L.circle(
+                [27.6891712, 96.4597226],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 309.6,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_1c823b8c87d24118abb05e1b18f0a641 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_1815c25e1c384d059e8cb22aa464f193 = $(`<div id="html_1815c25e1c384d059e8cb22aa464f193" style="width: 100.0%; height: 100.0%;">Arunachal Pradesh  387  on 14/07/2020 11:07:16</div>`)[0];
+                popup_1c823b8c87d24118abb05e1b18f0a641.setContent(html_1815c25e1c384d059e8cb22aa464f193);
+            
+
+            circle_0e277d54eef54364914100b787720199.bindPopup(popup_1c823b8c87d24118abb05e1b18f0a641)
+            ;
+
+            
+        
+    
+
+            var circle_cd6be13801f94e3fb2eac889fd7f12b9 = L.circle(
+                [25.5379432, 91.2999102],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 254.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_5659df8fe8e043ae9eb7592db26ee376 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_fd18c560143d427199b04d35bd99920e = $(`<div id="html_fd18c560143d427199b04d35bd99920e" style="width: 100.0%; height: 100.0%;">Meghalaya  318  on 13/07/2020 20:07:14</div>`)[0];
+                popup_5659df8fe8e043ae9eb7592db26ee376.setContent(html_fd18c560143d427199b04d35bd99920e);
+            
+
+            circle_cd6be13801f94e3fb2eac889fd7f12b9.bindPopup(popup_5659df8fe8e043ae9eb7592db26ee376)
+            ;
+
+            
+        
+    
+
+            var circle_38a95e7063d741fda9bff8e1a3e7edd6 = L.circle(
+                [23.2146169, 92.8687612],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 186.4,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_44a1dc317457428283ebf18697905a0d = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_101855b495a34e588671ecef0b0df1fc = $(`<div id="html_101855b495a34e588671ecef0b0df1fc" style="width: 100.0%; height: 100.0%;">Mizoram  233  on 14/07/2020 17:42:13</div>`)[0];
+                popup_44a1dc317457428283ebf18697905a0d.setContent(html_101855b495a34e588671ecef0b0df1fc);
+            
+
+            circle_38a95e7063d741fda9bff8e1a3e7edd6.bindPopup(popup_44a1dc317457428283ebf18697905a0d)
+            ;
+
+            
+        
+    
+
+            var circle_44cc0a90d58c4b6d85b0e4e03829168a = L.circle(
+                [10.2188344, 92.5771329],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 132.8,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_8cbfd65f065345e7a1e57cbc70d5cd3a = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_96ebb4fe5dc748f88af505f183407ae0 = $(`<div id="html_96ebb4fe5dc748f88af505f183407ae0" style="width: 100.0%; height: 100.0%;">Andaman and Nicobar Islands  166  on 13/07/2020 22:57:21</div>`)[0];
+                popup_8cbfd65f065345e7a1e57cbc70d5cd3a.setContent(html_96ebb4fe5dc748f88af505f183407ae0);
+            
+
+            circle_44cc0a90d58c4b6d85b0e4e03829168a.bindPopup(popup_8cbfd65f065345e7a1e57cbc70d5cd3a)
+            ;
+
+            
+        
+    
+
+            var circle_a4d4c24be5b743108c5e6a54df1b9cad = L.circle(
+                [27.601029, 88.45413638680145],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 132.8,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_e8597b8913474a79807e0ea34bb78095 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_f8684a7be06a49cd81a66ade4188687c = $(`<div id="html_f8684a7be06a49cd81a66ade4188687c" style="width: 100.0%; height: 100.0%;">Sikkim  166  on 14/07/2020 00:28:10</div>`)[0];
+                popup_e8597b8913474a79807e0ea34bb78095.setContent(html_f8684a7be06a49cd81a66ade4188687c);
+            
+
+            circle_a4d4c24be5b743108c5e6a54df1b9cad.bindPopup(popup_e8597b8913474a79807e0ea34bb78095)
+            ;
+
+            
+        
+    
+
+            var circle_cb935508d3664553bed9e1a53c6592a4 = L.circle(
+                [10.8832771, 72.8171069],
+                {
+  "bubblingMouseEvents": true,
+  "color": "blue",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_36e3b03bf42741fd97bdbbcc7e08cb04);
+            
+    
+            var popup_e46330cff28345a3817210fcdc5037d9 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_65f95ac299de4f0b97ceb6537076c287 = $(`<div id="html_65f95ac299de4f0b97ceb6537076c287" style="width: 100.0%; height: 100.0%;">Lakshadweep  0  on 26/03/2020 07:19:29</div>`)[0];
+                popup_e46330cff28345a3817210fcdc5037d9.setContent(html_65f95ac299de4f0b97ceb6537076c287);
+            
+
+            circle_cb935508d3664553bed9e1a53c6592a4.bindPopup(popup_e46330cff28345a3817210fcdc5037d9)
+            ;
+
+            
+        
+</script>
